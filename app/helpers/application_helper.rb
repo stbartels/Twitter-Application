@@ -8,4 +8,8 @@ module ApplicationHelper
       "#{base_title} | #{@title}"
     end
   end
+  
+  def logo 
+    image_tag('logo.png', :alt => "Weblog Header Image", :height => "100px", :width => "100px", :border => "0px", :class=> "round")
+  end
 end
