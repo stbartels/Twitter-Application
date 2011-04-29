@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
   end
   
   def make_salt
-    secure_hash("#{Time.now.utf}--#{password}")
+    secure_hash("#{Time.now}--#{password}")
   end
   
   def secure_hash(string)
