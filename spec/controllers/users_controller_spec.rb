@@ -99,6 +99,11 @@ describe UsersController do
         flash[:success].should =~ /welcome to the twitter knock off weblog/i
       end
       
+      it "should sign the user in" do
+        post :create, :new => @attr
+        controller.should be_signed_in
+      end
+      
     end
   end
 end
