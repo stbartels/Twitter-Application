@@ -23,7 +23,12 @@ describe "LayoutLinks" do
   
   it "should have a signu age at '/signup'" do
     get '/signup'
-    resonse.should have_selector('title', :content => 'signup')
+    resonse.should have_selector('title', :content => 'Sign up')
+  end
+  
+   it "should have a signu age at '/signin'" do
+    get '/signin'
+    resonse.should have_selector('title', :content => 'Sign in')
   end
   
   it "should have the right links on the layout" do
