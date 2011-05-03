@@ -17,6 +17,10 @@ describe UsersController do
         Factory(:user, :email => "user@example.com")
         Factory(:user, :email => "usertwo@example.net")
         Factory(:user, :email => "another@example.org")
+        
+        50.times do 
+          Factory(:user, :email => Factory.next(:email))
+        end
       end
       it "should be successful" do
         get :index
@@ -28,9 +32,19 @@ describe UsersController do
       end
       it "should have an element for each user" do
         get :index
-        User.all.each do |user|
+        User.paginate(:page => 1).each do |user|
           response.should have_selector('li', :content => user.name)
         end
+      end
+      
+      it "should paginate users" do
+        get :index
+        response.should have_selector('div.pagination')
+        response.should have_selector("span.disabled", :content => "Previous")
+        response.should have_selector("a", :href => "/users?page=2",
+                                           :content => "2")
+        response.should have_selector("a", :href => "/user?page=2",
+                                           :content => "Next")
       end
     end
   end
